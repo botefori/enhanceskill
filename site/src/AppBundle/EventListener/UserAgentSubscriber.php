@@ -20,10 +20,12 @@ class UserAgentSubscriber implements EventSubscriberInterface
     }
 
 
-    public function onKernelRequest(GetResponseEvent$event)
+    public function onKernelRequest(GetResponseEvent $event)
     {
        $this->logger->info('RAAAAAAAWWWWWWWWWWWW');
-       dump($event);
+       $request=$event->getRequest();
+       $userAgent=$request->headers->get('User-Agent');
+       $this->logger->info('The request user agent is :'.$userAgent);
     }
 
     public static function getSubscribedEvents()
